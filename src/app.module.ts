@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { MessagesController } from './messages/messages.controller';
 import { Message } from './messages/entities/message.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { MessagesService } from './messages/messages.service';
 
 @Module({
   imports: [
@@ -18,9 +19,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       // autoLoadEntities: true,
       entities: [Message],
       synchronize: true
-    })
+    }),
+    TypeOrmModule.forFeature([Message])
   ],
   controllers: [AppController, MessagesController],
-  providers: [AppService],
+  providers: [AppService, MessagesService],
 })
 export class AppModule {}
